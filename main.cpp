@@ -20,13 +20,14 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     Moto m(100, 2000, "ducati", "1000cc");
     Automobile a(160, 5000, "fiat", "diesel" ,"1200cc");
-    
-    cout << m << endl;
-    cout << a << endl;
+    Moto m2(120, 3000, "honda", "1300cc");
+    Automobile a2(200, 20000, "lamborghini", "diesel", "3000cc");
     
     Gara gara(10,10);
     gara.aggiungiPartecipante(m);
     gara.aggiungiPartecipante(a);
+    gara.aggiungiPartecipante(m2);
+    gara.aggiungiPartecipante(a2);
     
     gara.partenza();
     

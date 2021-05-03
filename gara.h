@@ -33,20 +33,26 @@ void Gara::aggiungiPartecipante(Veicolo &v){
     veicoli[numero_iscritti++] = &v;
 }
 
+void swap(Veicolo **v, int i, int j){
+    Veicolo *t = v[i];
+    v[i] = v[j];
+    v[j] = t;
+}
+
 void Gara::controlla(int t){
     
-    int  max_temp = veicoli[0]->getVelocita();
-    int pos_max = 0;
-    
-    for (int i = 1; i < numero_iscritti; i++) {
-        if (veicoli[i]->getVelocita() > max_temp) {
-            max_temp = veicoli[i]->getVelocita();
-            pos_max = i;
+    for (int x = 0; x < numero_iscritti; x++) {
+        int  max_temp = veicoli[x]->getVelocita();
+        int pos_max = x;
+        for (int i = x+1; i < numero_iscritti; i++) {
+            if (veicoli[i]->getVelocita() > max_temp) {
+                max_temp = veicoli[i]->getVelocita();
+                swap(veicoli, i, pos_max);
+            }
         }
     }
-    
-    cout << "Il veicolo più veloce è " << *veicoli[pos_max] << " e ha velocità " << veicoli[pos_max]->getVelocita() << endl;
-    
+    cout << "\n>> Classifica istante " << t;
+    this->stampaClassifica();
 }
 
 void Gara::partenza(){
@@ -64,5 +70,11 @@ void Gara::partenza(){
 }
 
 void Gara::stampaClassifica(){
+    
+    cout << "\n\n---------------CLASSIFICA---------------\n\n";
+    
+    for (int i = 0; i < numero_iscritti; i++) {
+        cout << i+1 << ") " << *veicoli[i] << "\n\n";
+    }
     
 }
